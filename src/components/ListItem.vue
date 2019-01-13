@@ -1,6 +1,6 @@
 <template>
 <li class="todo-item" :class="{ completed: isCompleted }">
-  <div class="todo-content" v-if="populateWith.empty">
+  <div class="todo-content" v-if="!editing">
     <p>{{ todo.priority }} | {{ todo.title }}</p>
     <span>
       <button type="button" class ="delete-button" @click="deleteTodo">X</button>
@@ -11,7 +11,9 @@
     </span>
   </div>
 
-  <todo-form v-else/>
+  <div class="todo-form" v-else>
+    <todo-form/>
+  </div>
 </li>
 </template>
 
@@ -21,14 +23,15 @@ import TodoForm from './TodoForm.vue'
 export default {
   name: 'ListItem',
   props: {
-    populateWith: {
-      type: Object,
-      default: () => ({ empty: true })
-    },
     todo: Object,
     isCompleted: {
       type: Boolean,
       default: false
+    }
+  },
+  data() {
+    return {
+      editing: false
     }
   },
   components: {
@@ -42,7 +45,7 @@ export default {
       this.$emit('complete')
     },
     editTodo() {
-      this.$emit('edit')
+      this.editing = !this.editing
     }
   }
 }
