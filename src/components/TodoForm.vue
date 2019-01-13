@@ -9,7 +9,7 @@
   </label>
 
   <button type="submit">+</button>
-  <button type="button" class="cancel-button" @click="cancel" v-if="!populateWith.empty">Cancel</button>
+  <button type="button" class="cancel-button" @click="close" v-if="!populateWith.empty">Cancel</button>
 </form>
 </template>
 
@@ -41,10 +41,16 @@ export default {
       if (this.todo.title !== '' && this.todo.priority !== null && this.todo.priority >= 1 && this.todo.priority <= 10) {
         this.$emit('submit', this.todo)
         this.clearForm()
+        this.close()
       }
     },
-    cancel() {
-      this.$emit('cancel')
+    close() {
+      this.$emit('close')
+    }
+  },
+  created() {
+    if (!this.populateWith.empty) {
+      this.todo = this.populateWith
     }
   }
 }
