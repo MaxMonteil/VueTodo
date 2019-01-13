@@ -12,7 +12,7 @@
   </div>
 
   <div class="todo-form" v-else>
-    <todo-form/>
+    <todo-form @cancel="editTodo"/>
   </div>
 </li>
 </template>

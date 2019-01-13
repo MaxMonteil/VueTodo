@@ -9,12 +9,19 @@
   </label>
 
   <button type="submit">+</button>
+  <button type="button" class="cancel-button" @click="cancel" v-if="!populateWith.empty">Cancel</button>
 </form>
 </template>
 
 <script>
 export default {
   name: 'TodoForm',
+  props: {
+    populateWith: {
+      type: Object,
+      default: () => ({ empty: false })
+    }
+  },
   data() {
     return {
       todo: {
@@ -35,6 +42,9 @@ export default {
         this.$emit('submit', this.todo)
         this.clearForm()
       }
+    },
+    cancel() {
+      this.$emit('cancel')
     }
   }
 }
@@ -73,15 +83,37 @@ button {
   padding: 0;
 
   /* custom styling */
-  background-color: #42b983;
+  background-color: white;
+  border: 1px solid #42b983;
   margin-left: 8px;
   margin-bottom: 8px;
   border-radius: 50%;
   width: 32px;
   height: 32px;
-  color: white;
+  color: #42b983;
   font-size: 1.2em;
   font-weight: bold;
   align-self: flex-end;
+}
+
+button:active {
+  background-color: #42b983;
+  color: white;
+}
+
+.cancel-button {
+  box-sizing: border-box;
+  font-size: 1em;
+  background: none;
+  border: none;
+  border-radius: 0;
+  text-align: center;
+  width: 50px;
+  color: white;
+  font-weight: normal;
+}
+
+.cancel-button:active {
+  font-weight: bold;
 }
 </style>
