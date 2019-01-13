@@ -12,7 +12,9 @@
   </div>
 
   <div class="todo-form" v-else>
-    <todo-form @cancel="editTodo"/>
+    <todo-form
+      :populateWith="todo"
+      @close="editTodo" />
   </div>
 </li>
 </template>
@@ -107,7 +109,7 @@ button:active {
   background-color: rgba(66, 185, 131, 0.4);
 }
 
-.completed > p {
+.completed > .todo-content > p {
   text-decoration: line-through;
 }
 </style>
