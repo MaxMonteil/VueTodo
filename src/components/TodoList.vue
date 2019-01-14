@@ -35,29 +35,29 @@ export default {
     TodoForm,
     ListItem
   },
-  data() {
+  data () {
     return {
       todos: [],
       completed: []
     }
   },
   computed: {
-    sortedTodos() {
+    sortedTodos () {
       return this.todos.sort((a, b) => a.priority - b.priority)
     }
   },
   methods: {
-    addTodo(todo) {
+    addTodo (todo) {
       this.todos.push(todo)
     },
-    deleteTodo({i, isCompleted}) {
+    deleteTodo ({ i, isCompleted }) {
       if (isCompleted) {
         this.completed.splice(i, 1)
       } else {
         this.todos.splice(i, 1)
       }
     },
-    completeTodo(index) {
+    completeTodo (index) {
       this.completed.push(this.todos.splice(index, 1)[0])
     }
   }

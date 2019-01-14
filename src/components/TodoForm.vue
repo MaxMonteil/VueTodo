@@ -22,7 +22,7 @@ export default {
       default: () => ({ empty: true })
     }
   },
-  data() {
+  data () {
     return {
       todo: {
         title: '',
@@ -31,29 +31,29 @@ export default {
     }
   },
   computed: {
-    icon() {
+    icon () {
       return this.populateWith.empty ? '+' : '✓'
     }
   },
   methods: {
-    clearForm() {
+    clearForm () {
       this.todo = {
         title: '',
         priority: null
       }
     },
-    submit() {
+    submit () {
       if (this.todo.title !== '' && this.todo.priority !== null && this.todo.priority >= 1 && this.todo.priority <= 10) {
         this.$emit('submit', this.todo)
         this.clearForm()
         this.close()
       }
     },
-    close() {
+    close () {
       this.$emit('close')
     }
   },
-  created() {
+  created () {
     if (!this.populateWith.empty) {
       this.todo = this.populateWith
     }

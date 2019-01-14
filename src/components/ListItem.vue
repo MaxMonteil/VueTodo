@@ -11,11 +11,10 @@
     </span>
   </div>
 
-  <div class="todo-form" v-else>
-    <todo-form
-      :populateWith="todo"
-      @close="editTodo" />
-  </div>
+  <todo-form
+    v-else
+    :populateWith="todo"
+    @close="editTodo" />
 </li>
 </template>
 
@@ -31,22 +30,22 @@ export default {
       default: false
     }
   },
-  data() {
+  components: {
+    TodoForm
+  },
+  data () {
     return {
       editing: false
     }
   },
-  components: {
-    TodoForm
-  },
   methods: {
-    deleteTodo() {
+    deleteTodo () {
       this.$emit('delete')
     },
-    completeTodo() {
+    completeTodo () {
       this.$emit('complete')
     },
-    editTodo() {
+    editTodo () {
       this.editing = !this.editing
     }
   }
