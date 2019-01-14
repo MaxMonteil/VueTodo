@@ -8,8 +8,8 @@
     <input type="text" placeholder="Get milk..." v-model.trim="todo.title">
   </label>
 
-  <button type="submit">{{ icon }}</button>
-  <button type="button" class="cancel-button" @click="close" v-if="!populateWith.empty">X</button>
+  <button type="submit" title="save">{{ icon }}</button>
+  <button type="button" title="cancel" class="cancel-button" @click="close" v-if="!populateWith.empty">X</button>
 </form>
 </template>
 
