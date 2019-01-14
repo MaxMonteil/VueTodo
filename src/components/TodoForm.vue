@@ -8,8 +8,8 @@
     <input type="text" placeholder="Get milk..." v-model.trim="todo.title">
   </label>
 
-  <button type="submit">+</button>
-  <button type="button" class="cancel-button" @click="close" v-if="!populateWith.empty">Cancel</button>
+  <button type="submit">{{ icon }}</button>
+  <button type="button" class="cancel-button" @click="close" v-if="!populateWith.empty">X</button>
 </form>
 </template>
 
@@ -19,7 +19,7 @@ export default {
   props: {
     populateWith: {
       type: Object,
-      default: () => ({ empty: false })
+      default: () => ({ empty: true })
     }
   },
   data() {
@@ -28,6 +28,11 @@ export default {
         title: '',
         priority: null
       }
+    }
+  },
+  computed: {
+    icon() {
+      return this.populateWith.empty ? '+' : '✓'
     }
   },
   methods: {
@@ -67,6 +72,7 @@ export default {
 label {
   margin-right: 16px;
 }
+
 input {
   display: block;
   margin: 8px 0;
@@ -98,28 +104,16 @@ button {
   height: 32px;
   color: #42b983;
   font-size: 1.2em;
-  font-weight: bold;
+  /* font-weight: bold; */
   align-self: flex-end;
+}
+
+.cancel-button {
+  font-size: 0.83em;
 }
 
 button:active {
   background-color: #42b983;
   color: white;
-}
-
-.cancel-button {
-  box-sizing: border-box;
-  font-size: 1em;
-  background: none;
-  border: none;
-  border-radius: 0;
-  text-align: center;
-  width: 50px;
-  color: white;
-  font-weight: normal;
-}
-
-.cancel-button:active {
-  font-weight: bold;
 }
 </style>
