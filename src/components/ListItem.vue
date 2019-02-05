@@ -24,7 +24,10 @@ import TodoForm from './TodoForm.vue'
 export default {
   name: 'ListItem',
   props: {
-    todo: Object,
+    todo: {
+      type: Object,
+      required: true
+    },
     isCompleted: {
       type: Boolean,
       default: false
