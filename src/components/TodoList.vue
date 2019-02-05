@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h1 id="title">Reuse Forms Todo</h1>
+  <h1 id="title">Vue Todo</h1>
   <todo-form @submit="addTodo" />
 
   <h3 v-if="sortedTodos.length > 0">Todo</h3>
@@ -38,7 +38,8 @@ export default {
   data () {
     return {
       todos: [],
-      completed: []
+      completed: [],
+      dataFields: ['todos', 'completed']
     }
   },
   computed: {
@@ -46,9 +47,13 @@ export default {
       return this.todos.sort((a, b) => a.priority - b.priority)
     }
   },
+  mounted () {
+    this.dataFields.forEach(field => this.checkStorage(field))
+  },
   methods: {
     addTodo (todo) {
       this.todos.push(todo)
+      this.saveTodos()
     },
     deleteTodo ({ i, isCompleted }) {
       if (isCompleted) {
@@ -56,9 +61,23 @@ export default {
       } else {
         this.todos.splice(i, 1)
       }
+      this.saveTodos()
     },
     completeTodo (index) {
       this.completed.push(this.todos.splice(index, 1)[0])
+      this.saveTodos()
+    },
+    saveTodos () {
+      this.dataFields.forEach(field => localStorage.setItem(field, JSON.stringify(this[field])))
+    },
+    checkStorage (key) {
+      if (localStorage.getItem(key)) {
+        try {
+          this[key] = JSON.parse(localStorage.getItem(key))
+        } catch (e) {
+          localStorage.removeItem(key)
+        }
+      }
     }
   }
 }
