@@ -49,7 +49,6 @@ export default {
       this.$emit('complete')
     },
     editTodo () {
-      this.$emit('edit')
       this.editing = !this.editing
     }
   }

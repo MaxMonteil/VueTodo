@@ -10,9 +10,7 @@
       :key="i"
       :todo="todo"
       @delete="deleteTodo(i)"
-      @complete="completeTodo(i)"
-      @edit="saveTodos"
-    />
+      @complete="completeTodo(i)"/>
   </ul>
 
   <h3 v-if="completed.length > 0">Done</h3>
@@ -22,8 +20,7 @@
       :key="i"
       :todo="todo"
       :isCompleted="true"
-      @delete="deleteTodo({ i, isCompleted: true })"
-    />
+      @delete="deleteTodo({ i, isCompleted: true })"/>
   </ul>
 </div>
 </template>
