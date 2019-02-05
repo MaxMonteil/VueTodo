@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import { checkStorage, saveToStorage } from './api/localStorageService'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -42,22 +44,18 @@ export default new Vuex.Store({
     },
     checkStorage ({ state, commit }) {
       state.dataFields.forEach(field => {
-        if (localStorage.getItem(field)) {
-          try {
-            commit('setState', {
-              field,
-              data: JSON.parse(localStorage.getItem(field))
-            })
-          } catch (e) {
-            localStorage.removeItem(field)
-          }
+        try {
+          commit('setState', {
+            field,
+            data: checkStorage(field) })
+        } catch (e) {
+          // The value in storage was invalid or corrupt so just set it to blank
+          commit('setState', { field, data: [] })
         }
       })
     },
-    saveTodos ({ state, commit }) {
-      state.dataFields.forEach(field => 
-        localStorage.setItem(field, JSON.stringify(state[field]))
-      )
+    saveTodos ({ state }) {
+      state.dataFields.forEach(field => saveToStorage(field, state[field]))
     }
   }
 })
