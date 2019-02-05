@@ -1,15 +1,15 @@
 <template>
-<form @submit.prevent="submit" id="todo-form">
-  <label id="priority">Priority
-    <input type="number" min="1" max="10" placeholder="1-10" v-model.number="todo.priority">
+<form @submit.prevent="submit" class="todo-form">
+  <label id="priority" class="form-label">Priority
+    <input class="form-input" type="number" min="1" max="10" placeholder="1-10" v-model.number="todo.priority">
   </label>
 
-  <label id="title">Title
-    <input type="text" placeholder="Get milk..." v-model.trim="todo.title">
+  <label id="title" class="form-label">Title
+    <input class="form-input" type="text" placeholder="Get milk..." v-model.trim="todo.title">
   </label>
 
-  <button type="submit" title="save">{{ icon }}</button>
-  <button type="button" title="cancel" class="cancel-button" @click="close" v-if="!populateWith.empty">X</button>
+  <button type="submit" title="save" class="todo-form-btn">{{ icon }}</button>
+  <button type="button" title="cancel" class="todo-form-btn cancel-button" @click="close" v-if="!populateWith.empty">X</button>
 </form>
 </template>
 
@@ -62,18 +62,18 @@ export default {
 </script>
 
 <style scoped>
-#todo-form {
+.todo-form {
   display: flex;
   margin: 24px;
   margin-bottom: 32px;
   justify-content: center;
 }
 
-label {
+.form-label {
   margin-right: 16px;
 }
 
-input {
+.form-input {
   display: block;
   margin: 8px 0;
   padding: 8px;
@@ -81,13 +81,13 @@ input {
   border: 0.5px solid rgba(0, 0, 0, 0.15);
 }
 
-input:focus {
+.form-input:focus {
   border: 0.5px solid #42b983;
   outline: 0;
   box-shadow: none;
 }
 
-button {
+.todo-form-btn {
   /* clear button styling */
   background: none;
   outline: none;
@@ -112,7 +112,7 @@ button {
   font-size: 0.83em;
 }
 
-button:active {
+todo-form-btn:active {
   background-color: #42b983;
   color: white;
 }

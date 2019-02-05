@@ -1,6 +1,6 @@
 <template>
-<div id="main">
-  <h1>Reuse Forms Todo</h1>
+<div>
+  <h1 id="title">Reuse Forms Todo</h1>
   <todo-form @submit="addTodo" />
 
   <h3 v-if="sortedTodos.length > 0">Todo</h3>
@@ -14,7 +14,7 @@
   </ul>
 
   <h3 v-if="completed.length > 0">Done</h3>
-  <ul>
+  <ul id="todo-list">
     <list-item
       v-for="(todo, i) in completed"
       :key="i"
@@ -65,12 +65,12 @@ export default {
 </script>
 
 <style scoped>
-h1 {
+#title {
   text-align: center;
   margin: 40px 0;
 }
 
-ul {
+#todo-list {
   margin: 0;
   padding: 0;
 }
