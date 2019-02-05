@@ -4,7 +4,7 @@
   <todo-form @submit="addTodo" />
 
   <h3 v-if="sortedTodos.length > 0">Todo</h3>
-  <ul>
+  <ul id="todo-list">
     <list-item
       v-for="(todo, i) in sortedTodos"
       :key="i"
