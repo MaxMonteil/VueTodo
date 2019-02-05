@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import TodoForm from './TodoForm.vue'
 import ListItem from './ListItem.vue'
 
@@ -38,50 +39,26 @@ export default {
     TodoForm,
     ListItem
   },
-  data () {
-    return {
-      todos: [],
-      completed: [],
-      dataFields: ['todos', 'completed']
-    }
-  },
   computed: {
+    ...mapState ([
+      'todos',
+      'completed'
+    ]),
     sortedTodos () {
       return this.todos.sort((a, b) => a.priority - b.priority)
     }
   },
   mounted () {
-    this.dataFields.forEach(field => this.checkStorage(field))
+    this.checkStorage()
   },
   methods: {
-    addTodo (todo) {
-      this.todos.push(todo)
-      this.saveTodos()
-    },
-    deleteTodo ({ i, isCompleted }) {
-      if (isCompleted) {
-        this.completed.splice(i, 1)
-      } else {
-        this.todos.splice(i, 1)
-      }
-      this.saveTodos()
-    },
-    completeTodo (index) {
-      this.completed.push(this.todos.splice(index, 1)[0])
-      this.saveTodos()
-    },
-    saveTodos () {
-      this.dataFields.forEach(field => localStorage.setItem(field, JSON.stringify(this[field])))
-    },
-    checkStorage (key) {
-      if (localStorage.getItem(key)) {
-        try {
-          this[key] = JSON.parse(localStorage.getItem(key))
-        } catch (e) {
-          localStorage.removeItem(key)
-        }
-      }
-    }
+    ...mapActions([
+      'addTodo',
+      'deleteTodo',
+      'completeTodo',
+      'checkStorage',
+      'saveTodos'
+    ]),
   }
 }
 </script>
