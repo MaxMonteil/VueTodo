@@ -41,12 +41,12 @@ export default {
     ListItem
   },
   computed: {
-    ...mapState ([
+    ...mapState([
       'todos',
       'completed'
     ]),
     sortedTodos () {
-      return this.todos.sort((a, b) => a.priority - b.priority)
+      return this.todos.slice().sort((a, b) => a.priority - b.priority)
     }
   },
   mounted () {
@@ -59,7 +59,7 @@ export default {
       'completeTodo',
       'checkStorage',
       'saveTodos'
-    ]),
+    ])
   }
 }
 </script>
