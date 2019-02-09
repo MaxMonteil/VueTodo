@@ -1,29 +1,23 @@
-import idb from 'idb'
+import { openDb } from 'idb'
 
 const dbPromise = _ => {
-  'use strict'
-
   if (!('indexedDB' in window)) {
     throw new Error('Browser does not support IndexedDB')
   }
 
-  return idb.open('VueTodoDB', 1, upgradeDb => {
+  return openDb('VueTodoDB', 1, upgradeDb => {
     if (!upgradeDb.objectStoreNames.contains('todos')) {
-      const todos = upgradeDb.createObjectStore('todos', { autoIncrement: true })
-
-      todos.createIndex('todo', 'todo', { unique: false })
+      upgradeDb.createObjectStore('todos')
     }
 
     if (!upgradeDb.objectStoreNames.contains('completed')) {
-      const completed = upgradeDb.createObjectStore('completed', { autoIncrement: true })
-
-      completed.createIndex('todo', 'todo', { unique: false })
+      upgradeDb.createObjectStore('completed')
     }
   })
 }
 
-export const checkStorage = async storeName => {
-  dbPromise
+const checkStorage = async storeName => {
+  return dbPromise()
     .then(db => {
       const tx = db.transaction(storeName, 'readonly')
       const store = tx.objectStore(storeName)
@@ -35,8 +29,8 @@ export const checkStorage = async storeName => {
     })
 }
 
-export const saveToStorage = async (storeName, tasks) => {
-  dbPromise
+const saveToStorage = async (storeName, tasks) => {
+  return dbPromise()
     .then(db => {
       const tx = db.transaction(storeName, 'readwrite')
       const store = tx.objectStore(storeName)
@@ -48,4 +42,9 @@ export const saveToStorage = async (storeName, tasks) => {
     .catch(error => {
       return error
     })
+}
+
+export default {
+  checkStorage,
+  saveToStorage
 }
