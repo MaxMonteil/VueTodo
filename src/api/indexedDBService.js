@@ -17,31 +17,29 @@ const dbPromise = _ => {
 }
 
 const checkStorage = async storeName => {
-  return dbPromise()
-    .then(db => {
-      const tx = db.transaction(storeName, 'readonly')
-      const store = tx.objectStore(storeName)
+  try {
+    const db = await dbPromise()
+    const tx = db.transaction(storeName, 'readonly')
+    const store = tx.objectStore(storeName)
 
-      return store.get(storeName)
-    })
-    .catch(error => {
-      return error
-    })
+    return store.get(storeName)
+  } catch (error) {
+    return error
+  }
 }
 
 const saveToStorage = async (storeName, tasks) => {
-  return dbPromise()
-    .then(db => {
-      const tx = db.transaction(storeName, 'readwrite')
-      const store = tx.objectStore(storeName)
+  try {
+    const db = await dbPromise()
+    const tx = db.transaction(storeName, 'readwrite')
+    const store = tx.objectStore(storeName)
 
-      store.put(tasks, storeName)
+    store.put(tasks, storeName)
 
-      return tx.complete
-    })
-    .catch(error => {
-      return error
-    })
+    return tx.complete
+  } catch (error) {
+    return error
+  }
 }
 
 export default {
