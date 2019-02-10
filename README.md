@@ -38,11 +38,13 @@ Article coming soon...
 
 ## Future Improvements
 
+* Deploy the app
 * Full PWA
 * Share Todo lists
 * Make accounts
 * Build a backend API
 * Push Notifications
 * App Redesign
+* Use server side rendering
 
 This list is open to more ideas!
