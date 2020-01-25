@@ -1,9 +1,14 @@
 <template>
-<div>
-  <h1 id="title">Vue Todo</h1>
+<div class="flex flex-col mt-20 mx-4">
+  <h1 class="text-center text-4xl font-bold my-4 mb-12 text-green-500">Simple Todos</h1>
   <todo-form @submit="addTodo" />
 
-  <h3 v-if="sortedTodos.length > 0">Todo</h3>
+  <h2
+    v-if="sortedTodos.length > 0"
+    class="text-2xl font-bold mt-4 text-green-500 tracking-wide"
+  >
+    Tasks
+  </h2>
   <ul id="todo-list">
     <list-item
       v-for="(todo, i) in sortedTodos"
@@ -15,7 +20,12 @@
     />
   </ul>
 
-  <h3 v-if="completed.length > 0">Done</h3>
+  <h2
+    v-if="completed.length > 0"
+    class="text-2xl font-bold mt-4 text-gray-600 tracking-wide"
+  >
+    Done
+  </h2>
   <ul id="todo-list">
     <list-item
       v-for="(todo, i) in completed"
@@ -63,15 +73,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-#title {
-  text-align: center;
-  margin: 40px 0;
-}
-
-#todo-list {
-  margin: 0;
-  padding: 0;
-}
-</style>
