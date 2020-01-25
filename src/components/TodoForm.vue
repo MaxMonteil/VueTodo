@@ -1,15 +1,56 @@
 <template>
-<form @submit.prevent="submit" class="todo-form">
-  <label id="priority" class="form-label">Priority
-    <input class="form-input" type="number" min="1" max="10" placeholder="1-10" v-model.number="todo.priority">
+<form
+  @submit.prevent="submit"
+  class="flex flex-wrap justify-between sm:justify-center"
+>
+  <label
+    class="inline sm:mr-4"
+    :class="populateWith.empty ? 'mr-8' : ''"
+  >
+    Priority
+    <input
+      class="block my-2 p-2 rounded border border-gray-400 focus:border-green-400 focus:outline-none"
+      type="number"
+      min="1"
+      max="10"
+      placeholder="1-10"
+      v-model.number="todo.priority"
+    >
   </label>
 
-  <label id="title" class="form-label">Title
-    <input class="form-input" type="text" placeholder="Get milk..." v-model.trim="todo.title">
+  <label class="inline">Task
+    <input
+      class="block my-2 p-2 rounded border border-gray-400 focus:border-green-400 focus:outline-none"
+      type="text"
+      placeholder="Get milk..."
+      v-model.trim="todo.title"
+    >
   </label>
 
-  <button type="submit" title="save" class="todo-form-btn">{{ icon }}</button>
-  <button type="button" title="cancel" class="todo-form-btn cancel-button" @click="close" v-if="!populateWith.empty">X</button>
+  <div
+    class="flex flex-grow sm:ml-4"
+    :class="{ 'sm:flex-grow-0': populateWith.empty }"
+  >
+    <button
+      type="submit"
+      title="save"
+      class="bg-white flex-grow active:bg-green-800 text-green-500 border border-green-500 mt-2 mb-3 rounded-full w-8 h-8 self-end font-bold hover:bg-green-500 hover:text-white focus:outline-none"
+      :class="populateWith.empty ? 'sm:flex-grow-0' : 'mr-4'"
+    >
+      {{ populateWith.empty ? '+' : 'Save' }}
+    </button>
+
+    <button
+      v-if="!populateWith.empty"
+      @click="close"
+      type="button"
+      title="cancel"
+      class="bg-white active:bg-green-800 text-green-500 border border-green-500 mt-2 mb-3 rounded-full w-8 h-8 self-end font-bold hover:bg-green-500 hover:text-white focus:outline-none"
+      :class="populateWith.empty ? 'flex-grow-0' : 'flex-grow'"
+    >
+      Cancel
+    </button>
+  </div>
 </form>
 </template>
 
@@ -28,11 +69,6 @@ export default {
         title: '',
         priority: null
       }
-    }
-  },
-  computed: {
-    icon () {
-      return this.populateWith.empty ? '+' : '✓'
     }
   },
   methods: {
@@ -60,60 +96,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.todo-form {
-  display: flex;
-  margin: 24px;
-  margin-bottom: 32px;
-  justify-content: center;
-}
-
-.form-label {
-  margin-right: 16px;
-}
-
-.form-input {
-  display: block;
-  margin: 8px 0;
-  padding: 8px;
-  border-radius: 3px;
-  border: 0.5px solid rgba(0, 0, 0, 0.15);
-}
-
-.form-input:focus {
-  border: 0.5px solid #42b983;
-  outline: 0;
-  box-shadow: none;
-}
-
-.todo-form-btn {
-  /* clear button styling */
-  background: none;
-  outline: none;
-  border: none;
-  padding: 0;
-
-  /* custom styling */
-  background-color: white;
-  border: 1px solid #42b983;
-  margin-left: 8px;
-  margin-bottom: 8px;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  color: #42b983;
-  font-size: 1.2em;
-  /* font-weight: bold; */
-  align-self: flex-end;
-}
-
-.cancel-button {
-  font-size: 0.83em;
-}
-
-todo-form-btn:active {
-  background-color: #42b983;
-  color: white;
-}
-</style>
