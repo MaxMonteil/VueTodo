@@ -36,11 +36,9 @@ Looking forward, I want to make this app a PWA and that requires using IndexedDB
 
 [Make Your Vue App Last with IndexedDB](https://medium.com/@mntlmaxi/make-your-vue-app-last-with-indexeddb-66f02708830e)
 
-### TailwindCSS to Improve Design
+### Implementing a Design System
 
-I've been working on other Vue projects and as they increase in size, it becomes more difficult to manage styles. TailwindCSS looks like a great solution so in that branch we switch to using that to style the app.
-
-Article coming soon...
+I've been working on other Vue projects and as they increase in size, it becomes more difficult to manage styles. TailwindCSS looks like a great solution with which to manage various app wide styles.
 
 ## Future Improvements
 
