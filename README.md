@@ -28,7 +28,7 @@ Next is how to make your application data persist even without an internet conne
 
 Implementing localStorage was just a first step, to keep improving the application, it must be structured properly so here I add Vuex for state management and move all the localStorage code to it's own service file.
 
-Same like as above.
+Same link as above.
 
 ### IndexedDB
 
